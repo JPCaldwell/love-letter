@@ -59,6 +59,5 @@ using std::random_shuffle;
      */
     Deck::~Deck() {
         delete deck;
-        std::cout << "Deck deleted!" << std::endl;
     }
 //};
