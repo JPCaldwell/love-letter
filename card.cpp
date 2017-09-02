@@ -2,7 +2,10 @@
 
 using std::string;
 
-
+/**
+ * Initializer for Cards, sets the cards name, which is dependent on its value
+ *
+ */
 void Card::init() {
     //Value must be between 1 and 8, inclusive.  If it is not, set it to the closest bound
     if(value < 1) {
@@ -25,13 +28,24 @@ void Card::init() {
     }
 }
 
+/**
+ * Getter for Card.value
+ *
+ */
 int Card::getValue() const {
     return value;
 }
 
+/**
+ * Getter for Card.name
+ *
+ */
 string Card::getName() const {
     return name;
 }
 
-
+/**
+ * Constructor for Card, default value of 1
+ *
+ */
 Card::Card(int valueIn) : value(valueIn) {} 
