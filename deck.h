@@ -2,7 +2,8 @@
 #define DECK_H_
 
 #include <vector>
-#include "card.h"
+
+class Card;
 
 class Deck {
     public:
@@ -10,8 +11,9 @@ class Deck {
         ~Deck();
         void init();
         void getInfo();
+        const Card& draw();
     private:
-        std::vector<Card>* deck;
+        std::vector<Card *>* deck;
 };
 
 #endif

@@ -1,4 +1,5 @@
 #include "card.h"
+#include <iostream>
 
 using std::string;
 
@@ -40,8 +41,12 @@ int Card::getValue() const {
  * Getter for Card.name
  *
  */
-string Card::getName() const {
+const string& Card::getName() const {
     return name;
+}
+
+void Card::printInfo() const {
+    std::cout << "name: " << this->getName() << "\nvalue: " << this->getValue() << std::endl << std::endl;
 }
 
 /**

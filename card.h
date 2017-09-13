@@ -8,8 +8,9 @@ class Card {
     public:
         Card(int valueIn=1);        
         int getValue() const;
-        std::string getName() const;
+        const std::string& getName() const;
         void init();
+        void printInfo() const;
     private:
         std::string name;
         int value;
