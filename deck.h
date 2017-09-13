@@ -11,9 +11,12 @@ class Deck {
         ~Deck();
         void init();
         void getInfo();
-        const Card& draw();
+        const Card* const draw();
+        bool isEmpty();
     private:
         std::vector<Card *>* deck;
+        int topInd;
+
 };
 
 #endif

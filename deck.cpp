@@ -18,6 +18,7 @@ int rando(int i) {return std::rand() % i;}
      *
      */
     void Deck::init() {
+        
         std::srand ( unsigned ( std::time(0) ) );
         for(int i = 0; i < 5; ++i) {  //There are 5 guards (value 1) total
             deck->push_back(new Card(1));
@@ -42,8 +43,8 @@ int rando(int i) {return std::rand() % i;}
             (*it)->init();
         }
         random_shuffle(deck->begin(), deck->end(), rando);
-        //remove the first element after randomization
-        deck->erase(deck->begin());
+        //"delete" the top card after randomization
+        topInd++;        
     }
     
     /**
@@ -51,28 +52,39 @@ int rando(int i) {return std::rand() % i;}
      *
      */
     void Deck::getInfo() {
-        for(vector<Card *>::iterator it = deck->begin(); it != deck->end(); ++it) {
-            std::cout << (*it)->getValue() << '\n' << (*it)->getName() << "\n\n";
+        if(this->isEmpty()) {
+            std::cout << "Deck is empty!\n" << std::endl; 
+        }
+        for(int i = topInd; i < deck->size(); ++i) {
+            std::cout << deck->at(i)->getValue() << '\n' << deck->at(i)->getName() << "\n\n";
         }
     }
 
     /**
-     * return the 
-     *
+     * returns a reference to the top card and "removes" it from the deck
+     *      
      */
-    const Card& Deck::draw() {
-        if(!deck->empty()) {
-            Card& next = *(deck->at(0));
-            deck->erase(deck->begin());
-            return next;
+    const Card* const Deck::draw() {
+        if(!this->isEmpty()) {
+            const Card* const next = deck->at(topInd);
+            topInd++;    
+            return next;        
         }
+        else {
+            return 0; 
+        }
+                
+    }
+
+    bool Deck::isEmpty() {
+        return topInd == deck->size();
     }
 
     /**
      * Constructor for Deck
-     *
      */
-    Deck::Deck() : deck(new vector<Card *>()) {}
+    Deck::Deck() : deck(new vector<Card *>())
+                    , topInd(0) {}
     
     /**
      * Destructor for Deck
