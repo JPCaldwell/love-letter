@@ -12,7 +12,8 @@ class Deck {
         void init();
         void getInfo();
         const Card* const draw();
-        bool isEmpty();
+        bool isEmpty() const;
+        void reset();
     private:
         std::vector<Card *>* deck;
         int topInd;

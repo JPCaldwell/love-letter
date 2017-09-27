@@ -43,7 +43,7 @@ int rando(int i) {return std::rand() % i;}
             (*it)->init();
         }
         random_shuffle(deck->begin(), deck->end(), rando);
-        //"delete" the top card after randomization
+        //"delete" the top card after randomization; the top of the deck is always discarded
         topInd++;        
     }
     
@@ -61,7 +61,7 @@ int rando(int i) {return std::rand() % i;}
     }
 
     /**
-     * returns a reference to the top card and "removes" it from the deck
+     * returns a pointer to the top card and "removes" it from the deck
      *      
      */
     const Card* const Deck::draw() {
@@ -76,7 +76,17 @@ int rando(int i) {return std::rand() % i;}
                 
     }
 
-    bool Deck::isEmpty() {
+    /**
+     * Resets the deck for the next round
+     */
+
+    void Deck::reset() {
+        topInd = 0; //reset index to re-add the "removed" cards
+        random_shuffle(deck->begin(), deck->end(), rando); //shuffle the deck after resetting topInd
+        ++topInd; //"remove" the top card
+    }
+
+    bool Deck::isEmpty() const {
         return topInd == deck->size();
     }
 
