@@ -1,8 +1,11 @@
 #include "player.h"
 #include "card.h"
-#include <stdio>
+#include <iostream>
 
+using std::vector;
 
+//initialize static variable nextId of class Player
+int Player::nextId = 0;
 
 /**
  * Returns the player's id
@@ -12,9 +15,9 @@ int Player::getId() const {
 }
 
 /**
- * returns a pointer to an array containing the player's cards
+ * returns a pointer to a vector containing the player's cards
  */
-const Card* const Player::getHand() const {
+const vector<Card*>* const Player::getHand() const {
     return hand;
 }
 
@@ -24,9 +27,9 @@ const Card* const Player::getHand() const {
  */
 const Card* const Player::getCard(int index) const {
     if(index < 0 || index > 1) {   
-        return nullptr;
+        return 0;
     }
-    return hand[index];
+    return hand->at(index);
 }
 
 /**
@@ -47,9 +50,9 @@ void Player::setPoints(int value) {
  * sets the card at the given index to the given reference
  * returns true on success
  */
-bool Player::setCard(const Card& card, int index) {
+bool Player::setCard(Card& card, int index) {
     if(index >= 0 && index <= 1) { //check if index is in bounds
-        hand[index] = card;
+        hand->at(index) = &card;
         return 1; //success
     }
     return 0; //failure
@@ -60,12 +63,12 @@ bool Player::setCard(const Card& card, int index) {
  */
 Player::Player() : id(nextId++)
                             , points(0)
-                            , hand(new Card[2]) { }
+                            , hand(new vector<Card*>()) { }
 
 
 /**
  * Destructor for Player
  */                            
 Player::~Player() {
-    delete[] hand;
+    delete hand;
 }    
